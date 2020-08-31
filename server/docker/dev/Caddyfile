@@ -1,0 +1,12 @@
+localhost:8085 {
+    encode gzip
+
+    route /api/* {
+        root * /srv/app/public
+        php_fastcgi /api/* cfi_server:9000
+    }
+
+    reverse_proxy /* cfi_client:3000
+
+    log
+}

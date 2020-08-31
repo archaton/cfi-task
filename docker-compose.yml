@@ -1,0 +1,71 @@
+version: '3.7'
+services:
+
+  cfi_caddy:
+    image: caddy:2
+    volumes:
+      - ./server/docker/dev/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_certs:/data
+      - caddy_config:/config
+      - ./server:/srv/app
+    depends_on:
+      - cfi_server
+      - cfi_client
+    ports:
+      - 8085:8085
+    networks:
+      cfi:
+
+  cfi_server:
+    build:
+      context: ./server
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ./server:/srv/app
+    working_dir: /srv/app
+    environment:
+      - APP_SECRET=¯\_(ツ)_/¯
+      - APP_HOST=localhost:8085
+      - APP_SCHEME=https
+      - DATABASE_URL=postgres://postgres:postgres@cfi_db:5432/cfi_db
+    depends_on:
+      - cfi_db
+    networks:
+      cfi:
+        aliases:
+          - cfi_server
+
+  cfi_client:
+    image: node:12-alpine
+    working_dir: /app
+    volumes:
+      - ./client:/app
+    ports:
+      - 3000:3000
+    command: /bin/sh -c "yarn && yarn dev"
+    networks:
+      cfi:
+        aliases:
+          - cfi_client
+
+  cfi_db:
+    image: postgres:12-alpine
+    restart: always
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: cfi_db
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - db-storage:/var/lib/postgresql/data
+
+volumes:
+  caddy_certs:
+  caddy_config:
+  db-storage:
+    driver: local
+
+networks:
+  cfi:
+    name: cfi

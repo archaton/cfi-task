@@ -59,6 +59,10 @@ services:
       POSTGRES_USER: postgres
     volumes:
       - db-storage:/var/lib/postgresql/data
+    networks:
+      cfi:
+        aliases:
+          - cfi_db
 
 volumes:
   caddy_certs:

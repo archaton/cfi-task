@@ -32,12 +32,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Cfi\\": "src/"
+      "Cfi\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Cfi\\": "tests/unit/"
+      "Cfi\\": "tests/unit"
     }
   },
   "replace": {

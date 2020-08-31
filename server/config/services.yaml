@@ -15,6 +15,10 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     Cfi\Infrastructure\Doctrine\Repository\:
         resource: '../src/Infrastructure/Doctrine/Repository/**/*DoctrineRepository.php'
+    Cfi\Domain\Repository\UserRepository:
+        alias: Cfi\Infrastructure\Doctrine\Repository\UserDoctrineRepository
+    Cfi\Domain\Repository\WordRepository:
+        alias: Cfi\Infrastructure\Doctrine\Repository\WordDoctrineRepository
     Cfi\Domain\UuidGenerator:
         alias: 'Cfi\Application\Uuid4Generator'
     Cfi\Application\Uuid4Generator:

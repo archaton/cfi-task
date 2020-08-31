@@ -11,9 +11,12 @@ RUN touch /etc/apt/apt.conf.d/99fixbadproxy \
     && apt-get update -o Acquire::CompressionTypes::Order::=gz \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get update -y && apt-get install -y git unzip zip && \
+    && apt-get update -y && apt-get install -y git unzip zip libpq-dev && \
     docker-php-ext-configure json && \
     docker-php-ext-install json
+
+RUN docker-php-ext-install pdo_pgsql pgsql
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 
 RUN composer global require hirak/prestissimo --no-plugins --no-scripts
 

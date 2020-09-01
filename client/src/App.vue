@@ -20,14 +20,14 @@
       <v-toolbar-title>Welcome to the Application</v-toolbar-title>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
       >
         <router-view />
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-overlay :value="$root.$data.sharedState.isLoading()">
       <v-progress-circular

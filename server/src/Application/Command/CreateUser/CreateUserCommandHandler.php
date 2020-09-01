@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Cfi\Application\Command\CreateUser;
 
 
-use Cfi\Application\Security\Exception\AccessDeniedException;
+use Cfi\Application\Security\Exception\UserExistsException;
 use Cfi\Domain\Exception\NotFoundException;
 use Cfi\Domain\Model\User;
 use Cfi\Domain\Repository\UserRepository;
@@ -26,9 +26,9 @@ class CreateUserCommandHandler
         $ip = new IpAddress($_SERVER['REMOTE_ADDR']);
 
         try {
-            $this->userRepository->getByIp($ip);
+            $user = $this->userRepository->getByIp($ip);
 
-            throw new AccessDeniedException('User already registered with a different id.');
+            throw new UserExistsException((string) $user->getUserId());
         } catch (NotFoundException $notFoundException) {
             $user = new User(UserId::createFromString($command->getUserId()), $ip);
             $this->userRepository->add($user);

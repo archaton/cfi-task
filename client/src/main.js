@@ -10,6 +10,22 @@ const store = {
     debug: true,
     state: {
         loading: 0,
+        currentUser: {},
+    },
+    setCurrentUser: function(user) {
+        this.state.currentUser = {...this.state.currentUser, ...user};
+    },
+    getCurrentUser: function() {
+        return this.state.currentUser;
+    },
+    setCurrentUserSubmittedText: function(text) {
+        this.state.currentUser = {...this.state.currentUser, text};
+    },
+    clearCurrentUserSubmittedText: function() {
+        this.state.currentUser = {...this.state.currentUser, text: undefined};
+    },
+    getCurrentUserSubmittedText: function() {
+        return this.state.currentUser.text;
     },
     isLoading: function () {
         return this.state.loading > 0;

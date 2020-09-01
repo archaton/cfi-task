@@ -25,8 +25,6 @@ services:
         arguments: ['@Ramsey\Uuid\UuidFactoryInterface']
     Ramsey\Uuid\UuidFactoryInterface:
         factory: 'Ramsey\Uuid\Uuid::getFactory'
-    Cfi\Application\Security\UserStorage:
-        class: Cfi\Application\Security\SymfonyUserStorage
     JMS\Serializer\SerializerInterface:
         alias: jms_serializer
     JMS\Serializer\Naming\IdenticalPropertyNamingStrategy:
@@ -51,8 +49,6 @@ services:
     Cfi\Application\Bus\QueryBus:
         arguments: ['@query.bus']
         autoconfigure: false
-    Cfi\Application\Bus\Middleware\:
-        resource: '../src/Application/Bus/Middleware/*Middleware.php'
     Cfi\Application\EventListener\MissingResponseListener:
         tags: [{name: kernel.event_listener, event: kernel.view}]
     Cfi\Application\EventListener\ExceptionListener:

@@ -1,35 +1,34 @@
 <template>
-    <div>
-        <v-alert>Welcome to the Application</v-alert>
-        <v-row>
-            <v-col cols="12" md="6">
-                <v-form
-                    class="form-row"
-                    @submit.prevent="submit"
+    <v-row justify="center">
+        <v-col cols="12" md="6">
+            <v-alert color="light-blue lighten-4">Welcome to the Application</v-alert>
+            <v-form
+                class="form-row"
+                @submit.prevent="submit"
+            >
+                <v-textarea
+                    solo
+                    hint="Please enter text"
+                    label="Text"
+                    v-model="text"
+                    rows="5"
+                />
+                <v-btn
+                    block
+                    :disabled="loading"
+                    class="m-1"
+                    type="submit"
+                    variant="primary"
                 >
-                    <v-textarea
-                        solo
-                        hint="Please enter text"
-                        label="Text"
-                        v-model="text"
-                        rows="5"
+                    <i
+                        :class="loading ? 'fa-spin fa-spinner' : 'fa-check'"
+                        class="fas"
                     />
-                    <v-btn
-                        :disabled="loading"
-                        class="m-1"
-                        type="submit"
-                        variant="primary"
-                    >
-                        <i
-                            :class="loading ? 'fa-spin fa-spinner' : 'fa-check'"
-                            class="fas"
-                        />
-                        Submit
-                    </v-btn>
-                </v-form>
-            </v-col>
-        </v-row>
-    </div>
+                    Submit
+                </v-btn>
+            </v-form>
+        </v-col>
+    </v-row>
 </template>
 
 <script>

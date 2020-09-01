@@ -1,29 +1,39 @@
 <template>
-    <div>
-        <router-link to="/">Submit another text</router-link>
-        <span>You submitted text:</span>
-        <span>{{ $root.$data.sharedState.getCurrentUserSubmittedText() }}</span>
-        <v-simple-table v-if="results">
-            <template v-slot:default>
-                <thead>
-                    <tr>
-                        <th class="text-left">#</th>
-                        <th class="text-left">Word</th>
-                        <th class="text-left">Count</th>
-                        <th class="text-left">Stars</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(item, index) in results" :key="item.word">
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ item.word }}</td>
-                        <td>{{ item.count }}</td>
-                        <td>{{ showStars(index) }}</td>
-                    </tr>
-                </tbody>
-            </template>
-        </v-simple-table>
-    </div>
+    <v-row justify="center">
+        <v-col cols="12" md="6">
+            <v-btn
+                to="/"
+                tag="button"
+                class="m-1"
+                variant="secondary"
+                @click="$router.push({name: 'Home'})"
+            >
+                Submit another text
+            </v-btn>
+            <span>You submitted text:</span>
+            <span>{{ $root.$data.sharedState.getCurrentUserSubmittedText() }}</span>
+            <v-simple-table v-if="results">
+                <template v-slot:default>
+                    <thead>
+                        <tr>
+                            <th class="text-left">#</th>
+                            <th class="text-left">Word</th>
+                            <th class="text-left">Count</th>
+                            <th class="text-left">Stars</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in results" :key="item.word">
+                            <td>{{ index + 1 }}</td>
+                            <td>{{ item.word }}</td>
+                            <td>{{ item.count }}</td>
+                            <td>{{ showStars(index) }}</td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
+        </v-col>
+    </v-row>
 </template>
 
 <script>

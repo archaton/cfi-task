@@ -9,12 +9,17 @@ use Cfi\Domain\ValueObject\UserId;
 
 class User
 {
-    private $userId;
-    private $ipAddress;
+    private UserId $userId;
+    private IpAddress $ipAddress;
 
     public function __construct(UserId $userId, IpAddress $ipAddress)
     {
         $this->userId = $userId;
         $this->ipAddress = $ipAddress;
+    }
+
+    public function getUserId(): UserId
+    {
+        return $this->userId;
     }
 }

@@ -18,7 +18,7 @@
                         <td>{{ index + 1 }}</td>
                         <td>{{ item.word }}</td>
                         <td>{{ item.count }}</td>
-                        <td>-</td>
+                        <td>{{ showStars(index) }}</td>
                     </tr>
                 </tbody>
             </template>
@@ -52,6 +52,12 @@ export default {
                 console.error(e);
             }
             this.loading = false;
+        },
+        showStars(index) {
+            if (index > 2) {
+                return '-';
+            }
+            return '*'.repeat(3 - index);
         },
     },
 }

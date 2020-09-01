@@ -11,14 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class AddTextCommand implements Command
 {
     /**
-     * @var null|string
+     * @var string
      * @Serializer\Type("string")
      * @Assert\NotBlank()
      * @Assert\Type("string")
      */
-    private ?string $text;
+    private $text;
 
-    public function __construct(?string $text)
+    public function __construct(string $text)
     {
         $this->text = $text;
     }

@@ -27,22 +27,36 @@ services:
         factory: 'Ramsey\Uuid\Uuid::getFactory'
     Cfi\Application\Security\UserStorage:
         class: Cfi\Application\Security\SymfonyUserStorage
+    JMS\Serializer\SerializerInterface:
+        alias: jms_serializer
+    JMS\Serializer\Naming\IdenticalPropertyNamingStrategy:
+        class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
+    JMS\Serializer\Naming\PropertyNamingStrategyInterface:
+        class: JMS\Serializer\Naming\SerializedNameAnnotationStrategy
+        arguments: ['@JMS\Serializer\Naming\IdenticalPropertyNamingStrategy']
+    Cfi\Infrastructure\Doctrine\Query\:
+        resource: '../src/Infrastructure/Doctrine/Query/**/*DoctrineQueryHandler.php'
+        autoconfigure: false
+        tags: [{name: messenger.message_handler, bus: query.bus}]
+        lazy: true
+    Cfi\Application\Query\ListTextRank\ListTextRankQueryHandler:
+        alias: Cfi\Infrastructure\Doctrine\Query\ListTextRankDoctrineQueryHandler
 
     Cfi\Application\Command\:
         resource: '../src/Application/Command/**/*CommandHandler.php'
         autoconfigure: false
         tags: [{name: messenger.message_handler, bus: command.bus}]
-    Cfi\Application\Query\:
-        resource: '../src/Application/Query/**/*QueryHandler.php'
-        autoconfigure: false
-        tags: [{name: messenger.message_handler, bus: query.bus}]
     Cfi\Application\Bus\:
         resource: '../src/Application/Bus/*Bus.php'
+    Cfi\Application\Bus\QueryBus:
+        arguments: ['@query.bus']
+        autoconfigure: false
     Cfi\Application\Bus\Middleware\:
         resource: '../src/Application/Bus/Middleware/*Middleware.php'
-    Cfi\Application\EventListener\:
-        resource: '../src/Application/EventListener/*Listener.php'
+    Cfi\Application\EventListener\MissingResponseListener:
         tags: [{name: kernel.event_listener, event: kernel.view}]
+    Cfi\Application\EventListener\ExceptionListener:
+        tags: [{name: kernel.event_listener, event: kernel.exception}]
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class

@@ -2,7 +2,8 @@ jms_serializer:
     visitors:
         xml_serialization:
             format_output: '%kernel.debug%'
-#    metadata:
+    metadata:
+        infer_types_from_doctrine_metadata: false
 #        auto_detection: false
 #        directories:
 #            any-name:
@@ -11,3 +12,9 @@ jms_serializer:
 #            another-name:
 #                namespace_prefix: "My\\BarBundle"
 #                path: "@MyBarBundle/Resources/config/serializer"
+    property_naming: JMS\Serializer\Naming\PropertyNamingStrategyInterface
+    default_context:
+        serialization:
+            serialize_null: true
+        deserialization:
+            serialize_null: true

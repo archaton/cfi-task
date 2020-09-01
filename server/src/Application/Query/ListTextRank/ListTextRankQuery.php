@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Cfi\Application\Query\ListTextRank;
+
+use Cfi\Application\Bus\Query;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
+class ListTextRankQuery implements Query
+{
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\Uuid()
+     */
+    private $userId;
+
+    public function __construct(string $userId)
+    {
+        $this->userId = $userId;
+    }
+
+    public function getUserId(): string
+    {
+        return $this->userId;
+    }
+}

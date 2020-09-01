@@ -1,5 +1,9 @@
 add_text:
   path: /text
   methods: [POST]
-  stateless: true
   controller: Cfi\Application\Controller\AddTextController
+
+list_user_text:
+  path: /users/{userId}/text
+  methods: [GET]
+  controller: Cfi\Application\Controller\ListUserTextController

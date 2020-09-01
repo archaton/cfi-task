@@ -20,7 +20,7 @@ class AddTextController
         $this->serializer = $serializer;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): void
     {//TODO move to param converter
         $command = $this->serializer->deserialize($request->getContent(), AddTextCommand::class, 'json');
 

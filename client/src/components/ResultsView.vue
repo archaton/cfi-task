@@ -11,7 +11,11 @@
                 Submit another text
             </v-btn>
             <span>You submitted text:</span>
-            <span>{{ $root.$data.sharedState.getCurrentUserSubmittedText() }}</span>
+            <v-textarea
+                solo
+                disabled
+                :value="$root.$data.sharedState.getCurrentUserSubmittedText()"
+            />
             <v-simple-table v-if="results">
                 <template v-slot:default>
                     <thead>

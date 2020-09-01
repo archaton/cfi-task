@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Cfi\Application\Command\AddText;
+namespace Cfi\Application\Command\CreateUser;
+
 
 use Cfi\Application\Bus\Command;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AddTextCommand implements Command
+class CreateUserCommand implements Command
 {
     /**
      * @var string
@@ -18,18 +19,10 @@ class AddTextCommand implements Command
      * @Assert\Uuid()
      */
     private $userId;
-    /**
-     * @var string
-     * @Serializer\Type("string")
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     */
-    private $text;
 
-    public function __construct(string $userId, string $text)
+    public function __construct(string $userId)
     {
         $this->userId = $userId;
-        $this->text = $text;
     }
 
     public function getUserId(): string
@@ -37,8 +30,4 @@ class AddTextCommand implements Command
         return $this->userId;
     }
 
-    public function getText(): string
-    {
-        return $this->text;
-    }
 }

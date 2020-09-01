@@ -1,5 +1,5 @@
 add_text:
-  path: /text
+  path: /users/{userId}/text
   methods: [POST]
   controller: Cfi\Application\Controller\AddTextController
 
@@ -7,3 +7,8 @@ list_user_text:
   path: /users/{userId}/text
   methods: [GET]
   controller: Cfi\Application\Controller\ListUserTextController
+
+create_user:
+  path: /users
+  methods: [POST]
+  controller: Cfi\Application\Controller\CreateUserController

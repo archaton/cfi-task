@@ -8,7 +8,7 @@ framework:
                 middleware:
                     - validation
                     - doctrine_transaction
-                    - 'Cfi\Application\Bus\Middleware\SetCurrentUserMiddleware'
+#                    - 'Cfi\Application\Bus\Middleware\SetCurrentUserMiddleware'
             query.bus:
                 middleware:
                     - validation
